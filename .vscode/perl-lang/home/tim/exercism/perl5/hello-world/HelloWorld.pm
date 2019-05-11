@@ -1,0 +1,1 @@
+[{"line":2,"containerName":"","name":"strict","kind":2},{"containerName":"","line":3,"name":"warnings","kind":2},{"kind":2,"name":"Exporter","containerName":"","line":4},{"kind":13,"name":"@EXPORT_OK","defintion":"our","line":5,"containerName":"main::"},{"containerName":"main::","line":7,"name":"hello","defintion":"sub","children":[],"kind":12}]
