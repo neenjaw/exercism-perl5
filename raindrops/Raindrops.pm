@@ -15,14 +15,14 @@ sub raindrop {
 
   my $result = '';
 
-  for my $factor_sound (@factor_sounds) {
+  foreach my $factor_sound (@factor_sounds) {
     my ($factor, $sound) = @$factor_sound;
 
     if (is_factor($number, $factor)) { 
       $result .= $sound
     }
   }
-  
+
   return $result || $number;
 }
 
