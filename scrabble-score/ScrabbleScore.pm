@@ -4,29 +4,24 @@ use warnings;
 use Exporter 'import';
 our @EXPORT_OK = qw(score);
 
-use Data::Dumper;
-
-
 sub score {
   my ( $word, %extensions ) = @_;
 
   # if double_word flag is defined, use it, or else false
-  my $double_word = defined $extensions{'double_word'} ? $extensions{'double_word'} : 0;
+  my $double_word = $extensions{'double_word'};
 
   # if double_letters hash is defined, use it, else empty hash
-  my %double_letters = defined $extensions{'double_letters'} ? %{$extensions{'double_letters'}} : ();
+  my %double_letters = %{$extensions{'double_letters'} || {}};
   %double_letters = map { uc $_ => $double_letters{$_} } keys %double_letters;
 
   my $score_hash = score_map();
   my $score = 0;
 
-  foreach my $char (split //, $word) {
-    $char = uc $char;
-
+  foreach my $char (split '', uc $word) {
     $score = $score + $score_hash->{$char};
 
     if ($double_letters{$char}) {
-      $score = $score + $score_hash->{$char};
+      $score += $score_hash->{$char};
       delete($double_letters{$char});
     }
   }
