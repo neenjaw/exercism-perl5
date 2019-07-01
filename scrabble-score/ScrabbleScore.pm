@@ -10,10 +10,32 @@ use Data::Dumper;
 sub score {
   my ( $word, %extensions ) = @_;
 
-  print Dumper $word;
-  print Dumper \%extensions;
+  # if double_word flag is defined, use it, or else false
+  my $double_word = defined $extensions{'double_word'} ? $extensions{'double_word'} : 0;
 
-  return undef;
+  # if double_letters hash is defined, use it, else empty hash
+  my %double_letters = defined $extensions{'double_letters'} ? %{$extensions{'double_letters'}} : ();
+  %double_letters = map { uc $_ => $double_letters{$_} } keys %double_letters;
+
+  my $score_hash = score_map();
+  my $score = 0;
+
+  foreach my $char (split //, $word) {
+    $char = uc $char;
+
+    $score = $score + $score_hash->{$char};
+
+    if ($double_letters{$char}) {
+      $score = $score + $score_hash->{$char};
+      delete($double_letters{$char});
+    }
+  }
+
+  if ($double_word) {
+    $score = $score * 2;
+  }
+
+  return $score;
 }
 
 sub score_map {

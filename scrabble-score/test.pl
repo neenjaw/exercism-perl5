@@ -5,7 +5,7 @@ use lib "/home/tim/exercism/perl5/scrabble-score";
 use ScrabbleScore;
 use Data::Dumper;
 
-my @word = ('a', ('double_letter' => ['a'], 'double_word' => 1));
+my @word = ('abcA', ('double_letters' => {'a' => 1}, 'double_word' => 1));
 
 # print Dumper \@word;
 # print Dumper $word[0];
@@ -13,7 +13,7 @@ my @word = ('a', ('double_letter' => ['a'], 'double_word' => 1));
 # print Dumper $word[1]{'double_letter'};
 # print Dumper $word[1]{'double_word'};
 
-ScrabbleScore::score(@word);
+print ScrabbleScore::score(@word) . "\n";
 
 # print "$transformed{a}\n";
 
