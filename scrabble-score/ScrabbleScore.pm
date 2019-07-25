@@ -33,18 +33,29 @@ sub score {
   return $score;
 }
 
+sub scores {
+  my %scores = (
+    'AEIOULNRST' => 1,
+    'DG' => 2,
+    'BCMP' => 3,
+    'FHVWY' => 4,
+    'K' => 5,
+    'JX' => 8,
+    'QZ' => 10,
+  );
+
+  return \%scores;
+}
+
 sub score_map {
-  my %hash;
+  my $scores = scores();
+  my %map;
 
-  $hash{$_} = 1  for qw(A E I O U L N R S T);
-  $hash{$_} = 2  for qw(D G);
-  $hash{$_} = 3  for qw(B C M P);
-  $hash{$_} = 4  for qw(F H V W Y);
-  $hash{$_} = 5  for qw(K);
-  $hash{$_} = 8  for qw(J X);
-  $hash{$_} = 10 for qw(Q Z);
+  while ( my ( $letters, $point ) = each %$scores ) {
+    $map{$_} = $point for split '', $letters;
+  }
 
-  return \%hash;
+  return \%map;
 }
 
 1;
