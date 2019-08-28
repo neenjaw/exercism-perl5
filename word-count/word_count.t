@@ -48,6 +48,6 @@ my $sub = $module . '::word_count';
 
 foreach my $c (@cases) {
   no strict 'refs';
-  is_deeply $sub->( $c->[0] ), $c->[1], $c->[2];
+  is_deeply $sub->( $c->[0] ), $c->[1], $c->[2] or diag explain $c->[1];;
 }
 
